@@ -112,19 +112,26 @@ function filtrarCursos( e ) {
 
 
     const terminoBuscar = textoBuscar.trim().toLocaleLowerCase();
-
     const cursosFiltrados = cursosTodos.filter( curso => (curso.titulo.toLocaleLowerCase()).includes(terminoBuscar) )
+    console.log(cursosFiltrados);
+
+
 
     submitBuscador.classList.add('activo')
     submitBuscador.style.display = 'none'
     botonBuscador.style.display = 'inline-block'
     
-    // submitBuscador.style.background = "url(../img/x.png)"
-    // submitBuscador.style.backgroundSize = "16px"
-    // submitBuscador.style.backgroundRepeat = "no-repeat"
-    // submitBuscador.style.backgroundPosition= "center"
-
     limpiarListaCursos()
+
+    // Crear y Mostrar mensaje de "Sin resultados"
+    if( cursosFiltrados.length <= 0 ){
+        const mensajeSinResultados = document.createElement('h3')
+        mensajeSinResultados.classList.add('sin-resultados')
+        mensajeSinResultados.textContent = 'No se encontraron resultados'
+        listaCursos.appendChild(mensajeSinResultados)
+        return
+    }
+    
     mostrarCursos(cursosFiltrados)
 }
 
