@@ -2,7 +2,7 @@
 
 
 
-## Carrito de compras de cursos con buscador desarrollado con vanilla javascript
+## Carrito de compras de cursos con buscador desarrollado con Javascript
 
 
 &nbsp;

@@ -1,5 +1,6 @@
 import cursos from "../data.js";
 // Variables para el renderizado y filtado de los produtos
+const storageKey = '1649014443816'
 
 const listaCursos = document.querySelector('#lista-cursos')
 const formulario = document.querySelector('#busqueda')
@@ -19,6 +20,13 @@ let articulosCarrito = []
 
 cargarEventListeners()
 function cargarEventListeners() {
+
+    // Leer de LocalStorage
+    document.addEventListener('DOMContentLoaded', ()=>{
+        articulosCarrito = JSON.parse( localStorage.getItem( storageKey ) ) || []
+        renderizarCarrito()
+    })
+
 
     // Eventos para la listas de cursos 
     formulario.addEventListener('submit', filtrarCursos)
@@ -231,6 +239,8 @@ function renderizarCarrito() {
         contendorCarrito.appendChild( row )
     })
 
+    actualizarStorage()
+
 }
 
 
@@ -243,6 +253,7 @@ function eliminarCurso(idCurso) {
 function eliminarTodos() {
     articulosCarrito = []
     limpiarHTMLCarrito()
+    actualizarStorage()
 }
 
 function limpiarHTMLCarrito() {
@@ -253,4 +264,8 @@ function limpiarHTMLCarrito() {
     while (contendorCarrito.firstChild) {
         contendorCarrito.removeChild( contendorCarrito.firstChild )
     }
+}
+
+function actualizarStorage() {
+    localStorage.setItem( storageKey, JSON.stringify(articulosCarrito) )
 }
